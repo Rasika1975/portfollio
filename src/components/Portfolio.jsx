@@ -12,6 +12,7 @@ import {
   Briefcase,
   GraduationCap,
   Send,
+  Award,
   ExternalLink,
   Github,
   Linkedin,
@@ -20,7 +21,6 @@ import {
   Sparkles,
   Layers,
   Zap,
-  Award,
   Terminal,
   Palette,
   ChevronRight,
@@ -35,6 +35,22 @@ import {
 } from 'lucide-react';
 import ngoImage from '../assets/ngo.png';
 import resumebuilderImage from '../assets/resumebilder.png';
+
+const ShineCard = ({ children, className = '', isDark, href, ...props }) => {
+  const Component = href ? 'a' : 'div';
+  return (
+    <Component
+      href={href}
+      className={`relative overflow-hidden group ${className}`}
+      {...props}
+    >
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+      </div>
+      {children}
+    </Component>
+  );
+};
 
 const Portfolio = () => {
   const [isDark, setIsDark] = useState(true);
@@ -141,6 +157,46 @@ const Portfolio = () => {
     ],
   };
 
+  const experience = [
+    {
+      title: 'Senior Full-Stack Developer',
+      company: 'Tech Innovations Inc.',
+      period: '2023 - Present',
+      desc: 'Spearheading development of AI-integrated web applications, architecting scalable microservices, and mentoring a team of 5 junior developers. Led migration to modern tech stack resulting in 40% performance improvement.',
+      type: 'work',
+      achievements: ['Led team of 5 developers', '40% performance boost', 'Architected microservices'],
+    },
+    {
+      title: 'Machine Learning Engineer',
+      company: 'DataScience Labs',
+      period: '2022 - 2023',
+      desc: 'Developed and deployed ML models for predictive analytics, computer vision, and NLP applications. Created data pipelines processing 10M+ records daily with 99.9% accuracy.',
+      type: 'work',
+      achievements: ['10M+ records/day pipeline', '99.9% model accuracy', 'Deployed 8 ML models'],
+    },
+    {
+      title: 'Full-Stack Developer Intern',
+      company: 'StartupHub Technologies',
+      period: '2021 - 2022',
+      desc: 'Built responsive web applications using React and Node.js. Contributed to core product features used by 50K+ active users. Implemented CI/CD pipelines reducing deployment time by 60%.',
+      type: 'work',
+      achievements: ['50K+ active users', '60% faster deployments', 'Full-stack features'],
+    },
+    {
+      title: 'Bachelor of Computer Science',
+      company: 'University of Technology',
+      period: '2019 - 2023',
+      desc: 'Specialized in Artificial Intelligence and Software Engineering. GPA: 3.8/4.0. Published research paper on deep learning optimization techniques.',
+      type: 'education',
+      achievements: ['GPA: 3.8/4.0', 'Published research', 'AI specialization'],
+    },
+  ];
+
+  const certifications = [
+    'National Level Hackathon Finalist',
+    'Coding Challenge Completion Certificates',
+  ];
+
   const projects = [
     {
       title: 'Mental Health Support Platform',
@@ -198,50 +254,10 @@ const Portfolio = () => {
       image: ngoImage,
       tech: ['React', 'Node.js', 'MongoDB', 'AI Module', 'Transparency Tools'],
       github: '#',
-      demo: ' https://hackhub-front.vercel.app/ ',
+      demo: 'https://hackhub-front.vercel.app/',
       category: 'Full-Stack',
       highlight: false,
     },
-  ];
-
-  const experience = [
-    {
-      title: 'Senior Full-Stack Developer',
-      company: 'Tech Innovations Inc.',
-      period: '2023 - Present',
-      desc: 'Spearheading development of AI-integrated web applications, architecting scalable microservices, and mentoring a team of 5 junior developers. Led migration to modern tech stack resulting in 40% performance improvement.',
-      type: 'work',
-      achievements: ['Led team of 5 developers', '40% performance boost', 'Architected microservices'],
-    },
-    {
-      title: 'Machine Learning Engineer',
-      company: 'DataScience Labs',
-      period: '2022 - 2023',
-      desc: 'Developed and deployed ML models for predictive analytics, computer vision, and NLP applications. Created data pipelines processing 10M+ records daily with 99.9% accuracy.',
-      type: 'work',
-      achievements: ['10M+ records/day pipeline', '99.9% model accuracy', 'Deployed 8 ML models'],
-    },
-    {
-      title: 'Full-Stack Developer Intern',
-      company: 'StartupHub Technologies',
-      period: '2021 - 2022',
-      desc: 'Built responsive web applications using React and Node.js. Contributed to core product features used by 50K+ active users. Implemented CI/CD pipelines reducing deployment time by 60%.',
-      type: 'work',
-      achievements: ['50K+ active users', '60% faster deployments', 'Full-stack features'],
-    },
-    {
-      title: 'Bachelor of Computer Science',
-      company: 'University of Technology',
-      period: '2019 - 2023',
-      desc: 'Specialized in Artificial Intelligence and Software Engineering. GPA: 3.8/4.0. Published research paper on deep learning optimization techniques.',
-      type: 'education',
-      achievements: ['GPA: 3.8/4.0', 'Published research', 'AI specialization'],
-    },
-  ];
-
-  const certifications = [
-    'National Level Hackathon Finalist',
-    'Coding Challenge Completion Certificates',
   ];
 
   return (
@@ -436,9 +452,10 @@ const Portfolio = () => {
                   { icon: Palette, title: 'UI/UX Design', desc: 'Crafting beautiful, user-centered interfaces', color: 'from-pink-500 to-rose-500' },
                   { icon: Zap, title: 'Performance Optimization', desc: 'Delivering blazing-fast user experiences', color: 'from-yellow-500 to-orange-500' },
                 ].map(({ icon: Icon, title, desc, color }, idx) => (
-                  <div
+                  <ShineCard
                     key={idx}
-                    className={`group p-6 rounded-2xl transition-all duration-300 hover:scale-105 cursor-pointer ${
+                    isDark={isDark}
+                    className={`p-6 rounded-2xl transition-all duration-300 hover:scale-105 cursor-pointer ${
                       isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-white hover:bg-gray-50'
                     } shadow-lg hover:shadow-2xl`}
                   >
@@ -447,7 +464,7 @@ const Portfolio = () => {
                     </div>
                     <h3 className="font-bold text-lg mb-2">{title}</h3>
                     <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{desc}</p>
-                  </div>
+                  </ShineCard>
                 ))}
               </div>
             </div>
@@ -459,22 +476,26 @@ const Portfolio = () => {
       <section id="projects" className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`transition-all duration-1000 ${isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-5xl font-bold text-center mb-6">
-              <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">Featured Projects</span>
-            </h2>
-            <p className="text-center text-gray-500 mb-16 text-lg">Showcasing my best work</p>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-blue-500 to-cyan-600 bg-clip-text text-transparent">
+                  Featured Projects
+                </span>
+              </h2>
+              <p className="text-gray-500 text-lg">Showcasing my best work</p>
+            </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, idx) => (
-                <div
+                <ShineCard
                   key={idx}
-                  className={`group relative rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 ${
+                  isDark={isDark}
+                  className={`rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 ${
                     isDark ? 'bg-gray-800' : 'bg-white'
                   } shadow-xl hover:shadow-2xl ${project.highlight ? 'md:col-span-2 lg:col-span-1' : ''}`}
-                  style={{ animationDelay: `${idx * 100}ms` }}
                 >
                   {project.highlight && (
-                    <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold rounded-full flex items-center gap-1">
+                    <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold rounded-full flex items-center gap-1 shadow-lg">
                       <Award size={14} />
                       Featured
                     </div>
@@ -487,17 +508,21 @@ const Portfolio = () => {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
+
                     <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                       <a
                         href={project.github}
-                        className="p-2.5 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
+                        className="p-2.5 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all hover:scale-110"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <Github size={18} className="text-white" />
                       </a>
                       <a
                         href={project.demo}
-                        className="p-2.5 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all hover:scale-110"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <ExternalLink size={18} className="text-white" />
                       </a>
@@ -523,8 +548,8 @@ const Portfolio = () => {
                       {project.tech.map((tech, i) => (
                         <span
                           key={i}
-                          className={`px-3 py-1 text-xs rounded-lg ${
-                            isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                          className={`px-3 py-1 text-xs rounded-lg transition-colors ${
+                            isDark ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                           }`}
                         >
                           {tech}
@@ -532,7 +557,7 @@ const Portfolio = () => {
                       ))}
                     </div>
                   </div>
-                </div>
+                </ShineCard>
               ))}
             </div>
 
@@ -570,11 +595,12 @@ const Portfolio = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <a
+                  <ShineCard
                     href="mailto:rasika.gudulkar@example.com"
+                    isDark={isDark}
                     className={`flex items-center gap-4 p-4 rounded-xl transition-all hover:scale-105 ${
                       isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-white hover:bg-gray-50'
-                    } shadow-lg group`}
+                    } shadow-lg`}
                   >
                     <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg group-hover:scale-110 transition-transform">
                       <Mail size={24} className="text-white" />
@@ -583,13 +609,14 @@ const Portfolio = () => {
                       <p className="font-semibold text-sm text-gray-500">Email</p>
                       <p className="font-medium text-lg">rasikagudulkar1008@gmail.com</p>
                     </div>
-                  </a>
+                  </ShineCard>
 
-                  <a
+                  <ShineCard
                     href="tel:+919876543210"
+                    isDark={isDark}
                     className={`flex items-center gap-4 p-4 rounded-xl transition-all hover:scale-105 ${
                       isDark ? 'bg-gray-800 hover:bg-gray-750' : 'bg-white hover:bg-gray-50'
-                    } shadow-lg group`}
+                    } shadow-lg`}
                   >
                     <div className="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-lg group-hover:scale-110 transition-transform">
                       <Phone size={24} className="text-white" />
@@ -598,7 +625,7 @@ const Portfolio = () => {
                       <p className="font-semibold text-sm text-gray-500">Phone</p>
                       <p className="font-medium text-lg">+91 9321836151</p>
                     </div>
-                  </a>
+                  </ShineCard>
                 </div>
 
                 <div>
@@ -608,20 +635,21 @@ const Portfolio = () => {
                       { icon: Github, label: 'GitHub', link: 'https://github.com/Rasika1975', color: 'from-gray-700 to-gray-800' },
                       { icon: Linkedin, label: 'LinkedIn', link: 'https://www.linkedin.com/in/rasika-gudulkar-55867934a/', color: 'from-blue-600 to-blue-700' },
                     ].map(({ icon: Icon, label, link, color }) => (
-                      <a
+                      <ShineCard
                         key={label}
                         href={link}
+                        isDark={isDark}
                         className={`p-4 rounded-xl bg-gradient-to-br ${color} text-white hover:scale-110 transition-all shadow-lg`}
                         aria-label={label}
                       >
                         <Icon size={24} />
-                      </a>
+                      </ShineCard>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className={`p-8 rounded-2xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-2xl`}>
+              <ShineCard isDark={isDark} className={`p-8 rounded-2xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-2xl`}>
                 <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
 
                 <div className="space-y-5">
@@ -693,7 +721,7 @@ const Portfolio = () => {
                     )}
                   </button>
                 </div>
-              </div>
+              </ShineCard>
             </div>
           </div>
         </div>
