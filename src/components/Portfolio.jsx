@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import ngoImage from '../assets/ngo.png';
 import resumebuilderImage from '../assets/resumebilder.png';
+import chatappImage from '../assets/chatapp.png';
 
 const ShineCard = ({ children, className = '', isDark, href, ...props }) => {
   const Component = href ? 'a' : 'div';
@@ -256,6 +257,16 @@ const Portfolio = () => {
       github: '#',
       demo: 'https://hackhub-front.vercel.app/',
       category: 'Full-Stack',
+      highlight: false,
+    },
+    {
+      title: 'Real-time Chat Application',
+      desc: 'A real-time chat application built using Java, MySQL, and WebSockets, enabling instant messaging and efficient data management.',
+      image: chatappImage,
+      tech: ['Java', 'MySQL', 'WebSocket'],
+      github: 'https://github.com/Rasika1975/chatapp',
+      demo: '#',
+      category: 'Java',
       highlight: false,
     },
   ];
