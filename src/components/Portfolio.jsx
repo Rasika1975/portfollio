@@ -36,6 +36,7 @@ import {
 import ngoImage from '../assets/ngo.png';
 import resumebuilderImage from '../assets/resumebilder.png';
 import chatappImage from '../assets/chatapp.png';
+import stayhubImage from '../assets/stayhub.png';
 
 const ShineCard = ({ children, className = '', isDark, href, ...props }) => {
   const Component = href ? 'a' : 'div';
@@ -199,6 +200,16 @@ const Portfolio = () => {
   ];
 
   const projects = [
+    {
+      title: 'StayHub - Rental Platform',
+      desc: 'An Airbnb-Style Rental Platform built with the MERN Stack, featuring secure JWT authentication, role-based users (Hosts/Guests), and comprehensive property management. Includes multi-image uploads via Cloudinary, a booking system with date validation, user dashboards, and advanced search functionality. Demonstrates scalable backend logic and complex database relationships.',
+      image: stayhubImage,
+      tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Cloudinary'],
+      github: '#',
+      demo: 'https://stayhub-demo.onrender.com/',
+      category: 'Full-Stack',
+      highlight: true,
+    },
     {
       title: 'Mental Health Support Platform',
       desc: 'Comprehensive mental wellness application providing mood tracking, meditation exercises, therapy resources, and AI-powered emotional support chatbot for mental health management.',
