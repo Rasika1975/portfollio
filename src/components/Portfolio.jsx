@@ -231,16 +231,6 @@ const Portfolio = () => {
       highlight: true,
     },
     {
-      title: 'Live Streaming Platform',
-      desc: 'Real-time video streaming application with WebRTC technology, live chat, viewer engagement features, and multi-stream support for content creators and audiences.',
-      image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=500&fit=crop',
-      tech: ['React', 'WebRTC', 'Socket.io', 'Node.js', 'Tailwind CSS'],
-      github: '#',
-      demo: 'https://livestreaming-beta.vercel.app/',
-      category: 'Full-Stack',
-      highlight: true,
-    },
-    {
       title: 'AI-powered Resume Builder',
       desc: 'An AI-powered Resume Builder that helps users create professional, personalized resumes instantly. It also includes an ATS (Applicant Tracking System) Analyzer that scans resumes against job descriptions and gives an ATS score, found/missing skills, and AI suggestions to improve the resume for better job chances.',
       image: resumebuilderImage,
@@ -249,16 +239,6 @@ const Portfolio = () => {
       demo: 'https://resumebuilder-silk-rho.vercel.app/',
       category: 'AI/ML',
       highlight: true,
-    },
-    {
-      title: 'E-Commerce Marketplace',
-      desc: 'Full-stack e-commerce platform with real-time inventory management, secure payment gateway integration, order tracking, and comprehensive admin dashboard with sales analytics.',
-      image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&h=500&fit=crop',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Redis'],
-      github: '#',
-      demo: '#',
-      category: 'Full-Stack',
-      highlight: false,
     },
     {
       title: 'TrustBridge',
