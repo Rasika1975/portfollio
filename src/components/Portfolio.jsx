@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import emailjs from "@emailjs/browser";
 import {
   Menu,
   X,
@@ -35,8 +36,9 @@ import {
 } from 'lucide-react';
 import ngoImage from '../assets/ngo.png';
 import resumebuilderImage from '../assets/resumebilder.png';
-import chatappImage from '../assets/chatapp.png';
+import chatappImage from '../assets/chatweb.png';
 import stayhubImage from '../assets/stayhub.png';
+import genwebaiImage from '../assets/GenWebai.png'
 
 const ShineCard = ({ children, className = '', isDark, href, ...props }) => {
   const Component = href ? 'a' : 'div';
@@ -106,14 +108,20 @@ const Portfolio = () => {
     setIsMenuOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
     setFormStatus('sending');
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setFormStatus(''), 3000);
-    }, 1500);
+    emailjs.send("service_1234", "template_1234", formData, "t-tiQou16apDF-fkj")
+      .then(() => {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setFormStatus(''), 3000);
+      })
+      .catch((err) => {
+        alert("Failed to send message.");
+        setFormStatus('');
+      });
   };
 
   const skills = {
@@ -221,13 +229,13 @@ const Portfolio = () => {
       highlight: true,
     },
     {
-      title: 'TaskFlow - Project Management Dashboard',
-      desc: 'Full-featured project management solution with task tracking, team collaboration, sprint planning, real-time updates, and comprehensive analytics dashboard for productivity optimization.',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=500&fit=crop',
-      tech: ['React', 'Vite', 'Tailwind CSS', 'Authentication', 'Real-time'],
+      title: 'GenWeb.ai - AI Website Generator',
+      desc: 'An AI-powered web app that generates modern, responsive websites from a text prompt. Features secure authentication, a credit-based pricing system, an interactive dashboard with a code editor, and one-click deployment.',
+      image: genwebaiImage,
+      tech: ['React', 'Vite', 'Tailwind CSS', 'AI/ML', 'Firebase', 'OpenRouter.ai API'],
       github: '#',
-      demo: 'https://project-management-dashboard-omega.vercel.app/',
-      category: 'Full-Stack',
+      demo: 'https://genweb-ai-1-cdrc.onrender.com/',
+      category: 'AI/ML',
       highlight: true,
     },
     {
@@ -653,15 +661,14 @@ const Portfolio = () => {
 
               <ShineCard isDark={isDark} className={`p-8 rounded-2xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-2xl`}>
                 <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-
-                <div className="space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <label className="block mb-2 font-semibold text-sm">Your Name</label>
                     <input
                       type="text"
                       value={formData.name}
-                      onChange={e => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="John Doe"
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Your Name"
                       className={`w-full px-4 py-3 rounded-xl transition-all ${
                         isDark 
                           ? 'bg-gray-900 border-gray-700 focus:border-blue-500' 
@@ -675,8 +682,8 @@ const Portfolio = () => {
                     <input
                       type="email"
                       value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="john@example.com"
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="Your Email"
                       className={`w-full px-4 py-3 rounded-xl transition-all ${
                         isDark 
                           ? 'bg-gray-900 border-gray-700 focus:border-blue-500' 
@@ -701,7 +708,7 @@ const Portfolio = () => {
                   </div>
 
                   <button
-                    onClick={handleSubmit}
+                    type="submit"
                     disabled={formStatus === 'sending'}
                     className="w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-bold hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
@@ -722,7 +729,7 @@ const Portfolio = () => {
                       </>
                     )}
                   </button>
-                </div>
+                </form>
               </ShineCard>
             </div>
           </div>
