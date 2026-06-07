@@ -39,6 +39,7 @@ import resumebuilderImage from '../assets/resumebilder.png';
 import chatappImage from '../assets/chatweb.png';
 import stayhubImage from '../assets/stayhub.png';
 import genwebaiImage from '../assets/GenWebai.png'
+import supportaiImage from '../assets/supportai.png'
 
 const ShineCard = ({ children, className = '', isDark, href, ...props }) => {
   const Component = href ? 'a' : 'div';
@@ -239,12 +240,13 @@ const Portfolio = () => {
       highlight: true,
     },
     {
-      title: 'AI-powered Resume Builder',
-      desc: 'An AI-powered Resume Builder that helps users create professional, personalized resumes instantly. It also includes an ATS (Applicant Tracking System) Analyzer that scans resumes against job descriptions and gives an ATS score, found/missing skills, and AI suggestions to improve the resume for better job chances.',
-      image: resumebuilderImage,
-      tech: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Puppeteer', 'AI/ATS Logic'],
+      title: 'Support AI – AI Customer Support SaaS',
+      desc: 'An AI-powered SaaS platform that enables businesses to embed intelligent customer support chatbots into their websites, featuring custom knowledge bases, secure authentication, real-time AI responses, and simple script-based integration.',
+      image: supportaiImage,
+      imageFit: 'contain',
+      tech: ['Next.js', 'TypeScript', 'MongoDB', 'Gemini AI', 'Scalekit Auth', 'Tailwind CSS'],
       github: '#',
-      demo: 'https://resumebuilder-silk-rho.vercel.app/',
+      demo: 'https://supportai-brown.vercel.app/',
       category: 'AI/ML',
       highlight: true,
     },
@@ -511,11 +513,15 @@ const Portfolio = () => {
                     </div>
                   )}
 
-                  <div className="relative h-56 overflow-hidden">
+                  <div className={`relative h-56 overflow-hidden ${project.imageFit === 'contain' ? 'bg-gray-950' : ''}`}>
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className={`w-full h-full transition-transform duration-700 ${
+                        project.imageFit === 'contain'
+                          ? 'object-contain p-3 group-hover:scale-105'
+                          : 'object-cover group-hover:scale-110'
+                      }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
